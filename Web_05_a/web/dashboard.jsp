@@ -1,12 +1,11 @@
 <%-- 
-    Document   : a
-    Created on : Jan 8, 2026, 11:35:37 AM
+    Document   : dashboard
+    Created on : Jan 19, 2026, 10:25:10 AM
     Author     : ADMIN
 --%>
 
 <%@page import="model.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,12 +14,20 @@
     </head>
     <body>
         <%
-            UserDTO u = (UserDTO)request.getAttribute("user");
+            UserDTO u = (UserDTO)session.getAttribute("user");
+            if(u!=null){
         %>
-        <h1> Welcome, <%=u.getFullName()%></h1>
+        <h1>Welcome, <%=u.getFullName()%></h1>
+        <a href="MainController?action=logout">Logout</a>
         <h2>Bang dieu khien</h2>
+        <a href="search.jsp">Search</a>
         Tinh nang 1 <br/>
         Tinh nang 2 <br/>
         Tinh nang 3 <br/>
+        <% }else{
+        response.sendRedirect("login.jsp");
+}
+        %>
     </body>
 </html>
+

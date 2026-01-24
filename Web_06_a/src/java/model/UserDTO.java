@@ -9,7 +9,7 @@ package model;
  * @author ADMIN
  */
 public class UserDTO {
-      private String userID;
+    private String userID;
     private String fullName;
     private String password;
     private String roleID;
@@ -64,4 +64,10 @@ public class UserDTO {
     public void setStatus(boolean status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" + "userID=" + userID + ", fullName=" + fullName + ", password=" + password + ", roleID=" + roleID + ", status=" + status + '}';
+    }
+    
 }

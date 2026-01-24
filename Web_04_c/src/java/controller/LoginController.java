@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.UserDAO;
 import model.UserDTO;
 
@@ -18,7 +19,7 @@ import model.UserDTO;
  *
  * @author ADMIN
  */
-public class MainController extends HttpServlet {
+public class LoginController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,35 +33,32 @@ public class MainController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet MainController</title>");            
-            out.println("</head>");
-            out.println("<body>");
+        String url = "";
+        HttpSession session = request.getSession();
+        if (session.getAttribute("user") == null) {
             String txtUsername = request.getParameter("txtUsername");
             String txtPassword = request.getParameter("txtPassword");
-            String url = "";
-            
+
             UserDAO udao = new UserDAO();
             UserDTO user = udao.login(txtUsername, txtPassword);
             System.out.println(user);
-            if(user!=null){
-                url ="a.jsp";
-                request.setAttribute("user", user);
-            }else{
+            if (user != null) {
+                if(user.isStatus()){
+                    
+                }
+                url = "a.jsp";
+                session.setAttribute("user", user);
+            } else {
                 url = "login.jsp";
-                request.setAttribute("message","Invalid username or password!");
+                request.setAttribute("message", "Invalid username or password!");
             }
-            //chuyen trang
-            RequestDispatcher rd = request.getRequestDispatcher(url);   
-            rd.forward(request, response);
-            
-            out.println("</body>");
-            out.println("</html>");
+
+        } else {
+            url = "a.jsp";
         }
+        // Chuyen trang
+        RequestDispatcher rd = request.getRequestDispatcher(url);
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

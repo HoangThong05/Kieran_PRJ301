@@ -42,8 +42,8 @@ public class MainController extends HttpServlet {
             out.println("<body>");
             String txtUsername = request.getParameter("txtUsername");
             String txtPassword = request.getParameter("txtPassword");
-            String url = "";
             
+            String url = "";
             UserDAO udao = new UserDAO();
             UserDTO user = udao.login(txtUsername, txtPassword);
             System.out.println(user);
