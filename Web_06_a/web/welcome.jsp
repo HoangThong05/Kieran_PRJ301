@@ -20,7 +20,7 @@
         %>
         
             <h1> Welcome, <%=u.getFullName()%></h1>
-            <a href="MainController?action=logout&">Logout</a>
+            <a href="MainController?action=logout">Logout</a>
             <a href="search.jsp">Search</a>
         <% } else{
             response.sendRedirect("login.jsp");
