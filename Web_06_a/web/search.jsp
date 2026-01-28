@@ -47,12 +47,12 @@
             <th></th>
         </thead>
         <%
-       
+            
             if(list.size()==0){
         %>
             No data matching the search criteria found!
         <%
-            }else {
+            }else{
                 for(UniversityDTO u : list){
         %>
                 <tr>
